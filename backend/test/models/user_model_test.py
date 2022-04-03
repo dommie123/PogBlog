@@ -1,7 +1,8 @@
-from src.models import user_model
+from src.models.user_model import User
 import pytest
 
 class TestUser():
+
     @pytest.fixture()
     def test_setup(self):
         # TODO test setup
