@@ -3,7 +3,7 @@ from flask_restful import Api
 from flask_jwt import JWT
 
 from resources.user import RUser, UserRegister
-from resources.post import Post, PostList
+from resources.post import RPost, PostList
 from resources.system import System
 
 from security import authenticate, identity
@@ -18,6 +18,6 @@ jwt = JWT(app, authenticate, identity)
 
 api.add_resource(RUser, '/user/<int:user_id>')
 api.add_resource(UserRegister, '/register')
-api.add_resource(Post, '/post/<string:title>')
+api.add_resource(RPost, '/post/<string:title>')
 api.add_resource(PostList, '/posts')
 api.add_resource(System, '/sys')
