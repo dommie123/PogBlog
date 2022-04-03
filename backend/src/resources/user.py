@@ -19,6 +19,7 @@ class RUser(Resource):
         if user:
             user.delete_from_db()
         return {'message': 'Success!'}, 410
+        
 
 class UserRegister(Resource):
     parser = reqparse.RequestParser()

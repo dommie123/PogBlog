@@ -11,6 +11,7 @@ class System(Resource):
     def instance(cls):
         if not cls._instance:
             cls._instance = cls.__new__(cls)
+            cls.loggedUser = None
         return cls._instance
 
     @classmethod

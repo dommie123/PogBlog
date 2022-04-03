@@ -44,6 +44,7 @@ class RPost(Resource):
         if post:
             post.delete_post()
         return {'message': 'Success!'}, 410
+        
 
 class PostList(Resource):
     def get(self):
