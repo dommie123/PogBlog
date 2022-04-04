@@ -1,8 +1,9 @@
 from db import db
 import hashlib
+import json
 
 class User(db.Model):
-    __tablename__ = "items"
+    __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80))
@@ -10,7 +11,7 @@ class User(db.Model):
     last_name = db.Column(db.String(80))
     email = db.Column(db.String(80))
     password = db.Column(db.String(80))
-    posts = db.Column(db.String(80))
+    posts = db.relationship("Post", backref="user", lazy='dynamic')
     followers = db.Column(db.Integer)
     
 
@@ -19,7 +20,7 @@ class User(db.Model):
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
-        self.password = hashlib.sha256(password).hexdigest() # hash the password so no one can know what it is
+        self.password = hashlib.sha256(password.encode('utf-8')).hexdigest() # hash the password so no one can know what it is
         self.followers = 0
         self.posts = []
 
@@ -30,7 +31,7 @@ class User(db.Model):
             "last_name": self.last_name,
             "email": self.email,
             "password": self.password,
-            "posts": self.posts,
+            "posts": json(self.posts),
             "followers": self.followers
         }
 
